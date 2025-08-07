@@ -1,3 +1,5 @@
+import { WeatherResponse } from "../weather-data";
+
 export async function fetchWeatherData({
   location,
   longitude,
@@ -32,10 +34,10 @@ export async function fetchWeatherData({
       }
       throw new Error(`${responseData.status}`);
     }
-    console.log(responseData);
-
     const jsonData = await responseData.json();
     console.log(jsonData);
+
+    return new WeatherResponse(jsonData);
   } catch (error) {
     console.error(error);
   }

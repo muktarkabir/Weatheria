@@ -5,12 +5,12 @@ export class WeatherResponse {
     this.address = jsonData.address;
     this.timezone = jsonData.timezone;
     this.description = jsonData.description;
-    this.latitue = jsonData.latitue;
+    this.latitude = jsonData.latitude;
     this.longitude = jsonData.longitude;
-    this.temperature = this.currentConditions.temp;
-    this.feelsLike = this.currentConditions.feelsLike;
+    this.feelsLike = this.currentConditions.feelslike;
+    this.temp = this.currentConditions.temp;
     this.icon = this.currentConditions.icon;
-    this.windSpeed = this.currentConditions.windSpeed;
+    this.windSpeed = this.currentConditions.windspeed;
     this.days = jsonData.days;
   }
 
