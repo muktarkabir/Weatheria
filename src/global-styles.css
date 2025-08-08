@@ -16,3 +16,42 @@
 [data-theme="light"] {
   color-scheme: light;
 }
+
+body{
+  height: 100%;
+  width: 100%;
+  background-color: var(--secondary);
+}
+
+header{
+  height: 60px;
+  border-bottom: 2px solid var(--divider);
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+gap: 30%;
+
+
+  .logo{
+    height: 50px;
+    width: 50px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    background-image: url("assets/image.png");
+   background-size: cover;
+   animation: move 2s ease;
+  }
+
+  .other-stuff{ 
+    display: flex;
+    height: 100%;
+    align-items: center;
+    gap: 16px;
+    .geolocation-logo{
+      height: 40px;
+      width: 40px;
+      border: 1px solid red;
+    }
+    border: 1px solid blue;
+  }
+}
