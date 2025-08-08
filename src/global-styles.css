@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "Inter";
+  src:
+    url("assets/fonts/Inter-Italic-VariableFont_opsz-wght.ttf") format("ttf"),
+    url("assets/fonts/Inter-VariableFont_opsz-wght.ttf") format("ttf");
+}
+
 :root {
   --bgc: light-dark(#f5f5f5, #121212);
   --surface: light-dark(#ffffff, #1e1e1e);
@@ -17,41 +24,88 @@
   color-scheme: light;
 }
 
-body{
+body {
   height: 100%;
   width: 100%;
-  background-color: var(--secondary);
+  font-family:
+    system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
-header{
+header {
   height: 60px;
   border-bottom: 2px solid var(--divider);
   display: flex;
   align-items: center;
   padding-left: 10px;
-gap: 30%;
+  gap: 30%;
 
-
-  .logo{
+  .logo {
     height: 50px;
     width: 50px;
     flex-shrink: 0;
     border-radius: 4px;
-    background-image: url("assets/image.png");
-   background-size: cover;
-   animation: move 2s ease;
+    background-image: url("assets/images/image.png");
+    background-size: cover;
+    animation: move 2s ease;
   }
 
-  .other-stuff{ 
+  .other-stuff {
     display: flex;
     height: 100%;
     align-items: center;
     gap: 16px;
-    .geolocation-logo{
+    .geolocation-logo {
       height: 40px;
       width: 40px;
       border: 1px solid red;
     }
-    border: 1px solid blue;
+  }
+}
+
+main {
+  font-family: "Inter";
+  display: flex;
+  width: min(98%, 900px);
+  height: 100%;
+  margin: auto;
+  padding: 8px 0;
+
+  & .today {
+    display: flex;
+    width: 100%;
+    & .icon {
+      aspect-ratio: 1;
+      width: 120px;
+      padding: 0.4rem;
+    }
+    & .temperature {
+      width: 130px;
+      height: 70%;
+      display: flex;
+      margin-right: 3%;
+      /* flex-direction: column; */
+      & .degrees {
+        height: 80%;
+        /* text-align: center; */
+        font-size: 3.2rem;
+        line-height: 0.8;
+      }
+      & .toggle {
+        width: 100%;
+        /* text-align: center; */
+        & .pipe {
+          margin: 0 4px;
+        }
+      }
+    }
+    .details {
+      height: 70%;
+      font-size: 0.84rem;
+      color: var(--text-high);
+    }
+    .summary {
+      margin-left: auto;
+    }
   }
 }
