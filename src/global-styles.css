@@ -66,10 +66,13 @@ header {
 main {
   font-family: "Inter";
   display: flex;
-  width: min(98%, 900px);
+  flex-direction: column;
+  border: 2px solid purple;
+  width: min(98%, 754px);
   height: 100%;
   margin: auto;
   padding: 8px 0;
+  position: relative;
 
   & .today {
     display: flex;
@@ -105,7 +108,37 @@ main {
       color: var(--text-high);
     }
     .summary {
-      margin-left: auto;
+      text-align: end;
+      width: 34ch;
+      position: absolute;
+      right: 4%;
+    }
+  }
+  & .remaining-days {
+    height: 120px;
+    display: flex;
+    & div.day-card {
+      height: 100%;
+      width: 90px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      align-items: center;
+      & .img{
+        height: 60px;
+        width: 60px;
+      }
+      p{
+        font-size: 1.2rem;
+      }
+      p.temps{
+        font-size: .8rem;
+        color: var(--text-medium);
+      }
+    }
+    & :hover{
+      background-color: var(--divider);
+      border-radius: 8px;
     }
   }
 }
