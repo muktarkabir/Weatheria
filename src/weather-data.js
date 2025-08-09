@@ -18,7 +18,7 @@ export class WeatherResponse {
     return new WeatherData(this.days[0]);
   }
   dataForTheNextFiveDays() {
-    const nextFiveDays = this.days.slice(1, 7);
+    const nextFiveDays = this.days.slice(0, 7);
     const data = [];
     nextFiveDays.forEach((day) => data.push(new WeatherData(day)));
     return data;

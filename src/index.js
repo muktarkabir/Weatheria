@@ -54,3 +54,46 @@ const test = {
   stations: ["DNAA", "remote"],
   source: "comb",
 };
+
+export const displayWeatherInformation = (weatherData) => {
+  const {
+    date,
+    description,
+    temp,
+    icon,
+    humidity,
+    windSpeed,
+    tempInFahrenheit,
+  } = weatherData.dataForToday();
+  const theIcon = import(`./assets/icons/${icon}.svg`).then(
+    (module) => module.default,
+  );
+  const main = document.querySelector("main");
+  const address = main.querySelector("span.address");
+  const todaySection = main.querySelector(".today");
+  const firstPart = todaySection.querySelector(".first");
+  const iconImage = firstPart.querySelector(".icon img");
+  iconImage.src = theIcon;
+  const temperature = firstPart.querySelector(".temperature.degrees span");
+  const details = firstPart.querySelector(".details");
+  const precipitationLevel = details.querySelectorAll("p span")[0];
+  const humidityLevel = details.querySelectorAll("p span")[1];
+  const windSpeedLevel = details.querySelectorAll("p span")[2];
+  const secondPart = todaySection.querySelector(".second");
+  const summary = secondPart.querySelector(".summary");
+  const day = summary.querySelector("h4");
+  const summaryText = summary.querySelector("p");
+  summaryText.textContent = description;
+};
+
+export const dayCard = (day, icon, min, max) => {
+  const card = document.createElement("div");
+  card.classList.add("day-card");
+  card.innerHTML = `
+                    <p>${day}</p>
+                    <div class="img">
+                    <img src="${icon}" alt="" />
+                    </div>
+                    <p class="temps"><span>${max}°</span><span>${min}°</span></p>`;
+  return card;
+};
