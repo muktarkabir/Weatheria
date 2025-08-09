@@ -66,8 +66,8 @@ header {
 main {
   font-family: "Inter";
   display: grid;
-  grid-template-rows: 130px 100px auto;
-  border: 2px solid purple;
+  grid-template-rows: 30px 130px 100px auto;
+  /* border: 2px solid purple; */
   width: min(98%, 754px);
   height: auto;
   margin: auto;
