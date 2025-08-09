@@ -41,15 +41,20 @@ export class WeatherData {
     this.severeRisk = data.severerisk;
     this.snow = data.snow;
     this.snowDepth = data.snowdepth;
-    this.source = data.source;
     this.temp = data.temp;
-    this.tempInFaherenheit = Number.parseInt(data.temp) * (9 / 5) * 32;
     this.tempMax = data.tempmax;
     this.tempMin = data.tempmin;
+    this.tempInFaherenheit = Number.parseInt(data.temp) * (9 / 5) * 32;
+    this.tempMaxInFaherenheit = Number.parseInt(data.tempmax) * (9 / 5) * 32;
+    this.tempMinInFaherenheit = Number.parseInt(data.tempmin) * (9 / 5) * 32;
     this.uvIndex = data.uvindex;
     this.visibility = data.visibility;
     this.windDir = data.winddir;
     this.windGust = data.windgust;
     this.windSpeed = data.windspeed;
+    this.hours = data.hours;
+    this.precipitation = data.precip;
+    this.sunRise = data.sunrise;
+    this.sunSet = data.sunset;
   }
 }
