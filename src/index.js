@@ -20,9 +20,6 @@ export const displayWeatherInformation = async (weatherData, index = 0) => {
   const data = weatherData.dataForTheNextFiveDays()[index];
   const dataForNextFewDays = weatherData.dataForTheNextFiveDays();
   const theIcon = await import(`./assets/icons/${data.icon}.svg`);
-  console.log(theIcon.default);
-  console.log(data);
-
   const main = document.querySelector("main");
   const address = main.querySelector("span.address");
   address.textContent = weatherData.resolvedAddress;
@@ -42,7 +39,9 @@ export const displayWeatherInformation = async (weatherData, index = 0) => {
   const secondPart = todaySection.querySelector(".second");
   const summary = secondPart.querySelector(".summary");
   const day = summary.querySelector("h4");
-  day.textContent = data.date;
+  day.textContent = new Date(data.date).toLocaleDateString("en-US", {
+    weekday: "long",
+  });
   const summaryText = summary.querySelector("p");
   summaryText.textContent = data.description;
 
@@ -51,7 +50,7 @@ export const displayWeatherInformation = async (weatherData, index = 0) => {
   dataForNextFewDays.forEach(async (day, index) => {
     const { date, icon, tempMax, tempMin } = day;
     const card = await dayCard({
-      day: date,
+      day: new Date(date).toLocaleDateString("en-US", { weekday: "short" }),
       icon: icon,
       index,
       max: tempMax,
@@ -76,7 +75,7 @@ export const dayCard = async ({ day, icon, index, max, min, onTap }) => {
                     <div class="img">
                     <img src="${theIcon.default}" alt="" />
                     </div>
-                    <p class="temps"><span>${max}°</span><span>${min}°</span></p>`;
+                    <p class="temps"><span>${Math.round(max)}°</span> <span>${Math.round(min)}°</span></p>`;
   card.addEventListener("click", onTap);
   return card;
 };

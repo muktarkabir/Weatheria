@@ -79,17 +79,18 @@ main {
     display: flex;
     width: 100%;
     max-height: 100px;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     .first {
       display: flex;
       max-height: 100%;
-      flex-grow: 1;
-      flex-basis: 300px;
+      /* flex-grow: 1; */
+      flex-basis: 400px;
       justify-content: space-between;
+      gap: 8px;
     }
     .second {
       display: flex;
-      flex-grow: 1;
+      /* flex-grow: 1; */
     }
     & .icon {
       width: 100px;
@@ -97,19 +98,15 @@ main {
       height: 100%;
     }
     & .temperature {
-      width: 130px;
-      height: 70%;
+      min-width: 130px;
       display: flex;
-      margin-right: 3%;
       & .degrees {
-        height: 80%;
         font-size: 3.2rem;
         line-height: 0.8;
       }
       & .toggle {
-        width: 100%;
         & .pipe {
-          margin: 0 4px;
+          margin: 0 2px;
         }
       }
     }
@@ -117,6 +114,7 @@ main {
       height: 70%;
       font-size: 0.84rem;
       color: var(--text-high);
+      width: 21ch;
     }
     & .summary {
       text-align: end;
@@ -155,7 +153,10 @@ main {
   }
 }
 
-@media (max-width: 652px) {
+@media (max-width: 740px) {
+  .today {
+    flex-direction: column;
+  }
   .summary {
     text-align: start !important;
   }
