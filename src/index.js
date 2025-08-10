@@ -47,21 +47,24 @@ export const displayWeatherInformation = async (weatherData, index = 0) => {
 
   const remainaingDays = main.querySelector(".remaining-days");
   remainaingDays.innerHTML = "";
-  dataForNextFewDays.forEach(async (day, index) => {
-    const { date, icon, tempMax, tempMin } = day;
+  for (let index = 0; index < dataForNextFewDays.length; index++) {
+    const element = dataForNextFewDays[index];
+    const { date, icon, tempMax, tempMin } = element;
     const card = await dayCard({
       day: new Date(date).toLocaleDateString("en-US", { weekday: "short" }),
       icon: icon,
       index,
       max: tempMax,
       min: tempMin,
-      onTap: () => {
+      onTap: function () {
         displayWeatherInformation(weatherData, index);
+        remainaingDays.childNodes[index].classList.add("selected");
       },
     });
     remainaingDays.append(card);
-  });
-  console.log(remainaingDays);
+  }
+
+  remainaingDays.childNodes[index].classList.add("selected");
 };
 
 export const dayCard = async ({ day, icon, index, max, min, onTap }) => {
@@ -69,7 +72,6 @@ export const dayCard = async ({ day, icon, index, max, min, onTap }) => {
   card.classList.add("day-card");
   card.dataset.index = index;
   const theIcon = await import(`./assets/icons/${icon}.svg`);
-  console.log(theIcon.default);
 
   card.innerHTML = `
                     <p>${day}</p>
@@ -83,6 +85,4 @@ export const dayCard = async ({ day, icon, index, max, min, onTap }) => {
 
 // let rigachikunData = await fetchWeatherData({ location: "rigachikun" });
 let mockData = await import("./data.json");
-// console.log(mockData.days);
-
 displayWeatherInformation(new WeatherResponse(mockData));
