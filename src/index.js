@@ -58,12 +58,10 @@ export const displayWeatherInformation = async (weatherData, index = 0) => {
       min: tempMin,
       onTap: function () {
         displayWeatherInformation(weatherData, index);
-        remainaingDays.childNodes[index].classList.add("selected");
       },
     });
     remainaingDays.append(card);
   }
-
   remainaingDays.childNodes[index].classList.add("selected");
 };
 
