@@ -153,6 +153,12 @@ main {
   }
 }
 
+.selected {
+  background-color: var(--divider);
+      border-radius: 8px;
+
+}
+
 @media (max-width: 740px) {
   .today {
     flex-direction: column;

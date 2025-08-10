@@ -61,6 +61,7 @@ export const displayWeatherInformation = async (weatherData, index = 0) => {
     });
     remainaingDays.append(card);
   });
+  console.log(remainaingDays);
 };
 
 export const dayCard = async ({ day, icon, index, max, min, onTap }) => {
