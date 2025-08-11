@@ -33,5 +33,9 @@
     "preformat": "eslint ./src --fix",
     "format": "prettier --write ./src",
     "prepare": "husky"
+  },
+  "dependencies": {
+    "chart.js": "^4.5.0",
+    "date-fns": "^4.1.0"
   }
 }

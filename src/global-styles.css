@@ -167,3 +167,10 @@ main {
     text-align: start !important;
   }
 }
+
+.stats{
+  canvas{
+    /* height: 100%;
+    width: 100%; */
+  }
+}

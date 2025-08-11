@@ -2,6 +2,7 @@ import "./reset.css";
 import "./global-styles.css";
 import { fetchWeatherData } from "./modules/weather-service.js";
 import { WeatherResponse } from "./weather-data.js";
+import Chart from "chart.js/auto";
 
 // console.log(rigachikunData.dataForToday());
 // let hereData;
@@ -44,6 +45,46 @@ export const displayWeatherInformation = async (weatherData, index = 0) => {
   });
   const summaryText = summary.querySelector("p");
   summaryText.textContent = data.description;
+  const canvas = document.querySelector("#hours");
+  let chart = new Chart(canvas, {
+    type: "line",
+    options: {
+      animation: true,
+      plugins: {
+        legend: {
+          display: false,
+        },
+        tooltip: {
+          enabled: true,
+        },
+      },
+      scales: {
+        x: {
+          grid: {
+            display: false,
+          },
+        },
+        y: {
+          grid: {
+            display: false,
+          },
+        },
+      },
+    },
+    data: {
+      labels: data.hours.map((hour) => hour.datetime.slice(0, 5)),
+      datasets: [
+        {
+          label: "Temperate in °C",
+          data: data.hours.map((hour) => hour.temp),
+          tension: 0.1,
+          fill: true,
+          backgroundColor: ["rgb(255, 215, 0,0.4)"],
+          borderColor: "gold",
+        },
+      ],
+    },
+  });
 
   const remainaingDays = main.querySelector(".remaining-days");
   remainaingDays.innerHTML = "";
@@ -57,6 +98,7 @@ export const displayWeatherInformation = async (weatherData, index = 0) => {
       max: tempMax,
       min: tempMin,
       onTap: function () {
+        chart.destroy();
         displayWeatherInformation(weatherData, index);
       },
     });
@@ -83,4 +125,6 @@ export const dayCard = async ({ day, icon, index, max, min, onTap }) => {
 
 // let rigachikunData = await fetchWeatherData({ location: "rigachikun" });
 let mockData = await import("./data.json");
+console.log(mockData);
 displayWeatherInformation(new WeatherResponse(mockData));
+// displayWeatherInformation(await fetchWeatherData({location:"new york"}));
