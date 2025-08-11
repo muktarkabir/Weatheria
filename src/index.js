@@ -43,6 +43,11 @@ export const displayWeatherInformation = async (weatherData, index = 0) => {
   day.textContent = new Date(data.date).toLocaleDateString("en-US", {
     weekday: "long",
   });
+  if (index == 0) {
+    console.log(weatherData.currentConditions);
+    day.textContent += ` ${weatherData.currentConditions.datetime.slice(0, 5)}`;
+    temperature.textContent = Math.round(weatherData.currentConditions.temp);
+  }
   const summaryText = summary.querySelector("p");
   summaryText.textContent = data.conditions;
   const canvas = document.querySelector("#hours");
@@ -72,12 +77,11 @@ export const displayWeatherInformation = async (weatherData, index = 0) => {
       },
     },
     data: {
-      labels: data.hours.map((hour) => hour.datetime.slice(0, 5)),
+      labels: data.hours.map((hour) => hour.datetime.slice(0, 2)),
       datasets: [
         {
           label: "Temperate in °C",
           data: data.hours.map((hour) => hour.temp),
-          tension: 0.1,
           fill: true,
           backgroundColor: ["rgb(255, 215, 0,0.4)"],
           borderColor: "gold",
@@ -105,6 +109,8 @@ export const displayWeatherInformation = async (weatherData, index = 0) => {
     remainaingDays.append(card);
   }
   remainaingDays.childNodes[index].classList.add("selected");
+
+  console.log(weatherData);
 };
 
 export const dayCard = async ({ day, icon, index, max, min, onTap }) => {
@@ -129,5 +135,5 @@ console.log(mockData);
 
 let latitude = 10.5178;
 let longitude = 7.40474;
-displayWeatherInformation(new WeatherResponse(mockData));
-// displayWeatherInformation(await fetchWeatherData({latitude,longitude}));
+// displayWeatherInformation(new WeatherResponse(mockData));
+displayWeatherInformation(await fetchWeatherData({ location: "france" }));
