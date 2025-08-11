@@ -44,7 +44,7 @@ export const displayWeatherInformation = async (weatherData, index = 0) => {
     weekday: "long",
   });
   const summaryText = summary.querySelector("p");
-  summaryText.textContent = data.description;
+  summaryText.textContent = data.conditions;
   const canvas = document.querySelector("#hours");
   let chart = new Chart(canvas, {
     type: "line",
@@ -126,5 +126,8 @@ export const dayCard = async ({ day, icon, index, max, min, onTap }) => {
 // let rigachikunData = await fetchWeatherData({ location: "rigachikun" });
 let mockData = await import("./data.json");
 console.log(mockData);
+
+let latitude = 10.5178;
+let longitude = 7.40474;
 displayWeatherInformation(new WeatherResponse(mockData));
-// displayWeatherInformation(await fetchWeatherData({location:"new york"}));
+// displayWeatherInformation(await fetchWeatherData({latitude,longitude}));
