@@ -1,6 +1,7 @@
 import "./reset.css";
 import "./global-styles.css";
 import "./styles/main.css";
+import "./styles/loader.css";
 import { fetchWeatherData } from "./modules/weather-service.js";
 import { displayWeatherInformation } from "./modules/display-weather-data.js";
 

@@ -27,6 +27,7 @@
 body {
   height: 100%;
   width: 100%;
+  padding-top: 0.6rem;
   font-family:
     system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -34,32 +35,46 @@ body {
 
 header {
   height: 60px;
-  border-bottom: 2px solid var(--divider);
+  border-bottom: 1px solid var(--divider);
   display: flex;
+  justify-content: center;
   align-items: center;
-  padding-left: 10px;
-  gap: 30%;
+  gap: 16px;
+  width: 100%;
+  align-items: center;
+}
 
-  .logo {
-    height: 50px;
-    width: 50px;
-    flex-shrink: 0;
-    border-radius: 4px;
-    background-image: url("assets/images/image.png");
-    background-size: cover;
-    animation: move 2s ease;
+.geolocation-logo {
+  height: 80%;
+  aspect-ratio: 1;
+  border: 1px solid grey;
+  border-radius: 4px;
+  margin-right: auto;
+}
+
+form {
+  height: 100%;
+  width: 90%;
+  display: flex;
+  gap: 6px;
+  input {
+    height: 80%;
   }
-
-  .other-stuff {
-    display: flex;
-    height: 100%;
-    align-items: center;
-    gap: 16px;
-    .geolocation-logo {
-      height: 40px;
-      width: 40px;
-      border: 1px solid red;
-    }
+  input {
+    width: 50%;
+    outline: none;
+  }
+  button{
+    all: unset;
+    background-color: #007BFF;
+    color: white;
+    font-weight: 700;
+    height: 48px;
+    aspect-ratio: 16/9;
+    padding: 0 .5rem;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
   }
 }
 
@@ -67,6 +82,3 @@ header {
   background-color: var(--divider);
   border-radius: 8px;
 }
-
-
-
