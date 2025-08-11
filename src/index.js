@@ -5,9 +5,13 @@ import { displayWeatherInformation } from "./modules/display-weather-data.js";
 
 let mockData = await import("./data.json");
 console.log(mockData);
+let latitude = null;
+let longitude = null;
 
 const geoLocationButton = document.querySelector(".geolocation-logo");
-geoLocationButton.addEventListener("click", getCurrentPosition);
+geoLocationButton.addEventListener("click", () => {
+  if (!latitude && !longitude) getCurrentPosition();
+});
 
 const form = document.querySelector("form");
 const locationInput = form.querySelector("input");
@@ -21,13 +25,11 @@ form.addEventListener("submit", async (e) => {
 function getCurrentPosition() {
   navigator.geolocation.getCurrentPosition(
     async (position) => {
+      latitude = position.coords.latitude;
+      longitude = position.coords.longitude;
       displayWeatherInformation(
-        await fetchWeatherData({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        }),
+        await fetchWeatherData({ latitude, longitude }),
       );
-      geoLocationButton.removeEventListener("click", getCurrentPosition);
     },
     (onEror) => {
       console.log(onEror);
