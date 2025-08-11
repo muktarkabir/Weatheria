@@ -1,4 +1,4 @@
-import { WeatherResponse } from "../weather-data";
+import { WeatherResponse } from "../models/weather-response.js";
 
 export async function fetchWeatherData({
   location,
