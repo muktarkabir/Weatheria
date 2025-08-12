@@ -42,6 +42,7 @@ header {
   gap: 16px;
   width: 100%;
   align-items: center;
+  /* transform: translateY(-150%); */
 }
 
 .geolocation-logo {
@@ -63,6 +64,9 @@ form {
   input {
     width: 50%;
     outline: none;
+    border-radius: 4px;
+    border: 2px solid black;
+    padding-left: .3rem;
   }
   button{
     all: unset;
@@ -78,6 +82,10 @@ form {
   }
 }
 
+input:user-invalid{
+  border: 2px solid red;
+  background-color: rgb(255, 0, 0,0.1);
+}
 .selected {
   background-color: var(--divider);
   border-radius: 8px;

@@ -35,9 +35,19 @@ export const displayWeatherInformation = async (weatherData, index = 0) => {
   }
   const summaryText = summary.querySelector("p");
   summaryText.textContent = data.conditions;
-  const canvas = document.querySelector("#hours");
+
+  //When a user searches for a location, the canvas needs to be destroyed to be resued,
+  //There isnt an easy way to do that from the way the code is written. This solution makes sure
+  //the canvas is fresh everytime the function is called.
+  const stats = document.querySelector(".stats");
+  stats.innerHTML = null;
+  const canvas = document.createElement("canvas");
+  canvas.style.height = "100px";
+  canvas.style.width = "754px";
+  canvas.id = "hours";
+  stats.append(canvas);
   //Showing weather data throughout the day using a line graph.
-  let chart = new Chart(canvas, {
+  let myChart = new Chart(canvas, {
     type: "line",
     options: {
       animation: true,
@@ -88,7 +98,7 @@ export const displayWeatherInformation = async (weatherData, index = 0) => {
       max: tempMax,
       min: tempMin,
       onTap: function () {
-        chart.destroy();
+        myChart.destroy();
         displayWeatherInformation(weatherData, index);
       },
     });
