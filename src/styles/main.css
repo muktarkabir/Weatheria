@@ -7,7 +7,7 @@ main {
   width: min(98%, 754px);
   margin: auto;
   padding: 8px 0;
-  /* display: none; */
+  display: none;
 }
 
 main h4 {

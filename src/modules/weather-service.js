@@ -39,6 +39,6 @@ export async function fetchWeatherData({
 
     return new WeatherResponse(jsonData);
   } catch (error) {
-    console.error(error);
+    throw new Error(error);
   }
 }

@@ -20,10 +20,44 @@ const locationInput = form.querySelector("input");
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  displayWeatherInformation(
-    await fetchWeatherData({ location: locationInput.value }),
-  );
+  try {
+    toggleLoader(true);
+    const weatherForecast = await fetchWeatherData({
+      location: locationInput.value,
+    });
+    toggleLoader(false);
+    document.querySelector("main").style.display = "grid";
+    displayWeatherInformation(weatherForecast);
+  } catch (error) {
+    showErrorScreen(error);
+  }
 });
+
+function showErrorScreen(error) {
+  toggleLoader(false);
+  const errorScreen = document.querySelector(".error-screen");
+  errorScreen.querySelector("h3").textContent = error;
+  errorScreen.style.transform = "translateY(0%)";
+}
+
+function hideErrorScreen() {
+  const errorScreen = document.querySelector(".error-screen");
+  errorScreen.querySelector("h3").textContent = "";
+  errorScreen.style.transform = "translateY(-200%)";
+}
+
+document
+  .querySelector(".error-screen button")
+  .addEventListener("click", hideErrorScreen);
+
+function toggleLoader(show = true) {
+  const loader = document.querySelector(".loader-container");
+  if (show) {
+    loader.style.display = "flex";
+  } else {
+    loader.style.display = "none";
+  }
+}
 function getCurrentPosition() {
   navigator.geolocation.getCurrentPosition(
     async (position) => {

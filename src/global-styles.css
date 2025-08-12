@@ -90,3 +90,34 @@ input:user-invalid{
   background-color: var(--divider);
   border-radius: 8px;
 }
+
+.error-screen{
+  width: 70%;
+  height: 70%;
+  border-radius: 8px;
+  background-color: var(--divider);
+  position: absolute;
+  left: 14%;
+  top: 16%;
+  display: flex;
+  flex-direction: column;
+  /* gap: 60px; */
+  align-items: center;
+  justify-content: start;
+  /* transform: translateY(-200%); */
+  transition: transform ease 400ms;
+
+  button{
+    all: unset;
+    background-color: #007BFF;
+    color: white;
+    font-weight: 700;
+    height: 48px;
+    aspect-ratio: 16/9;
+    padding: 0 .5rem;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 1.6rem;
+  }
+}
