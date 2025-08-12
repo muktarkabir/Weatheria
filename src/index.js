@@ -2,75 +2,24 @@ import "./reset.css";
 import "./global-styles.css";
 import "./styles/main.css";
 import "./styles/loader.css";
-import { fetchWeatherData } from "./modules/weather-service.js";
-import { displayWeatherInformation } from "./modules/display-weather-data.js";
-
-let mockData = await import("./data.json");
-console.log(mockData);
-let latitude = null;
-let longitude = null;
+import {
+  showWeatherData,
+  showWeatherDataForCurrentPosition,
+  hideErrorScreen,
+} from "./modules/utilities.js";
 
 const geoLocationButton = document.querySelector(".geolocation-logo");
-geoLocationButton.addEventListener("click", () => {
-  if (!latitude && !longitude) showWeatherDataForCurrentPosition();
-});
-
 const form = document.querySelector("form");
 const locationInput = form.querySelector("input");
+geoLocationButton.addEventListener("click", () => {
+  showWeatherDataForCurrentPosition();
+});
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  try {
-    toggleLoader(true);
-    const weatherForecast = await fetchWeatherData({
-      location: locationInput.value,
-    });
-    toggleLoader(false);
-    document.querySelector("main").style.display = "grid";
-    displayWeatherInformation(weatherForecast);
-  } catch (error) {
-    showErrorScreen(error);
-  }
+  showWeatherData(locationInput.value);
 });
-
-function showErrorScreen(error) {
-  toggleLoader(false);
-  const errorScreen = document.querySelector(".error-screen");
-  errorScreen.querySelector("h3").textContent = error;
-  errorScreen.style.transform = "translateY(0%)";
-}
-
-function hideErrorScreen() {
-  const errorScreen = document.querySelector(".error-screen");
-  errorScreen.querySelector("h3").textContent = "";
-  errorScreen.style.transform = "translateY(-200%)";
-}
 
 document
   .querySelector(".error-screen button")
   .addEventListener("click", hideErrorScreen);
-
-function toggleLoader(show = true) {
-  const loader = document.querySelector(".loader-container");
-  if (show) {
-    loader.style.display = "flex";
-  } else {
-    loader.style.display = "none";
-  }
-}
-function showWeatherDataForCurrentPosition() {
-  navigator.geolocation.getCurrentPosition(
-    async (position) => {
-      latitude = position.coords.latitude;
-      longitude = position.coords.longitude;
-      toggleLoader(true);
-      const weatherForecast = await fetchWeatherData({ latitude, longitude });
-      toggleLoader(false);
-      document.querySelector("main").style.display = "grid";
-      displayWeatherInformation(weatherForecast);
-    },
-    (error) => {
-      showErrorScreen(error);
-    },
-  );
-}
