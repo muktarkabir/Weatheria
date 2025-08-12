@@ -12,7 +12,7 @@ let longitude = null;
 
 const geoLocationButton = document.querySelector(".geolocation-logo");
 geoLocationButton.addEventListener("click", () => {
-  if (!latitude && !longitude) getCurrentPosition();
+  if (!latitude && !longitude) showWeatherDataForCurrentPosition();
 });
 
 const form = document.querySelector("form");
@@ -58,17 +58,19 @@ function toggleLoader(show = true) {
     loader.style.display = "none";
   }
 }
-function getCurrentPosition() {
+function showWeatherDataForCurrentPosition() {
   navigator.geolocation.getCurrentPosition(
     async (position) => {
       latitude = position.coords.latitude;
       longitude = position.coords.longitude;
-      displayWeatherInformation(
-        await fetchWeatherData({ latitude, longitude }),
-      );
+      toggleLoader(true);
+      const weatherForecast = await fetchWeatherData({ latitude, longitude });
+      toggleLoader(false);
+      document.querySelector("main").style.display = "grid";
+      displayWeatherInformation(weatherForecast);
     },
-    (onEror) => {
-      console.log(onEror);
+    (error) => {
+      showErrorScreen(error);
     },
   );
 }
